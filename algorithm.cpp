@@ -77,13 +77,17 @@ void navigateMenu(int choice){
       cin >> id;
       cout << "How many copies you wish to purchase: ";
       cin >> copies;
+      // Finding the index position of the inputted book ID
       index = linearSearch(bookID, id);
+      // Continue to ask for a book ID until a valid one is provided
       while (index == 0){
         cout << "That is not an existing book ID. Please enter the book ID you wish to purchase: ";
         cin >> id;
         index = linearSearch(bookID, id);
       }
+      // Function call to calculate the total cost
       totalPrice = calcTotalCost(bookPrice, index, copies);
+      // Outputing the data to the user
       cout << "Book ID: " << id << endl;
       cout << "Book Title: " << bookTitle[index] << endl;
       cout << "Number of books bought: " << copies << endl;
