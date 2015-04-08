@@ -19,6 +19,9 @@
 #include<iostream>
 #include<string>
 #include<iomanip>
+// Include for random number
+#include<cstdlib>
+#include<ctime>
 
 using namespace std;
 
@@ -83,6 +86,35 @@ void searchOutput(int id, string title, int qty, double cost){
   cout << "Total Cost: $" << setprecision(2) << fixed << cost << endl;
 }
 
+void initializeUnsortedArr(int *array, int size){
+  // Generate a random seed
+  srand (time(NULL));
+  for(int i=0;i<size;i++){
+    array[i] = rand() % 500 + 1;
+  }
+}
+
+void displayArray(int *array, int size){
+  for(int i=0;i<size;i++){
+    cout << array[i] << "\t";
+  }
+}
+
+void bubbleSort(int *array, int size){
+  while (true){
+    bool swapped = false;
+    for (int i = 0; i < size - 1; i++){
+      if (array[i] > array[i+1]){
+        int copy = array[i];
+        array[i] = array[i+1];
+        array[i+1] = copy;
+        swapped = true;
+      }
+    }
+    if (!swapped) break;
+  }
+}
+
 void navigateMenu(int choice){
   // Creating the arrays for the searching algorithm
   string bookTitle[] = {"Starting out with C++", "Java Programming", "Software Structures", "Design and Analysis of Algorithms", "Computer Graphics", "Artificial Intelligence: A Modern Approach", "Probability and Statistics", "Cognitive Science", "Modern Information Retrieval", "Speech and Language Processing"};
@@ -134,8 +166,18 @@ void navigateMenu(int choice){
       searchOutput(id, bookTitle[index], copies, totalPrice);
       break; 
     }
-    case 3:{
-      // Function call to Bubble Sort
+    case 3:{ // Bubble Sort
+      int arr[500];
+      // Create the unsorted array
+      initializeUnsortedArr(arr, 500);
+      cout << "**** BUBBLE SORT ****\n";
+      cout << "Unsorted array:\n";
+      displayArray(arr, 500);
+      cout << endl;
+      bubbleSort(arr, 500);
+      cout << endl << "Sorted array:\n";
+      displayArray(arr, 500);
+      cout << endl;
       break;
     }
     case 4:{
