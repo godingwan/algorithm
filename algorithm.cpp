@@ -75,6 +75,14 @@ double calcTotalCost(double *bookPrice, int index, int qty){
   return price *= qty;
 }
 
+void searchOutput(int id, string title, int qty, double cost){
+  // Outputing the data to the user
+  cout << "Book ID: " << id << endl;
+  cout << "Book Title: " << title << endl;
+  cout << "Number of books bought: " << qty << endl;
+  cout << "Total Cost: $" << setprecision(2) << fixed << cost << endl;
+}
+
 void navigateMenu(int choice){
   // Creating the arrays for the searching algorithm
   string bookTitle[] = {"Starting out with C++", "Java Programming", "Software Structures", "Design and Analysis of Algorithms", "Computer Graphics", "Artificial Intelligence: A Modern Approach", "Probability and Statistics", "Cognitive Science", "Modern Information Retrieval", "Speech and Language Processing"};
@@ -104,10 +112,7 @@ void navigateMenu(int choice){
       // Function call to calculate the total cost
       totalPrice = calcTotalCost(bookPrice, index, copies);
       // Outputing the data to the user
-      cout << "Book ID: " << id << endl;
-      cout << "Book Title: " << bookTitle[index] << endl;
-      cout << "Number of books bought: " << copies << endl;
-      cout << "Total Cost: $" << setprecision(2) << fixed << totalPrice << endl;
+      searchOutput(id, bookTitle[index], copies, totalPrice);
       break;
     }
     case 2:{
@@ -126,11 +131,7 @@ void navigateMenu(int choice){
       }
 	    // Function call to calculate the total cost
 	    totalPrice = calcTotalCost(bookPrice, index, copies);
-	    // Outputing the data to the user
-	    cout << "Book ID: " << id << endl;
-	    cout << "Book Title: " << bookTitle[index] << endl;
-	    cout << "Number of books bought: " << copies << endl;
-	    cout << "Total Cost: $" << setprecision(2) << fixed << totalPrice << endl;
+      searchOutput(id, bookTitle[index], copies, totalPrice);
       break; 
     }
     case 3:{
