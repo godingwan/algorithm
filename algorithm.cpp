@@ -45,12 +45,29 @@ void display(string *bookTitle, int *bookID, double *bookPrice){
 }
 
 int linearSearch(int *bookID, int id){
-  for (int i; i<10; i++){
+  for (int i = 0; i<10; i++){
     if (bookID[i] == id){
       return i;
     }
   }
-  return 0;
+  return -1;
+}
+
+int binarySearch(int *bookID, int id){
+  int max = 9, mid = 5, min = 0;
+  for (int i = 0; i < 10; i++){
+    mid = (max + min)/2;
+    if (id == bookID[mid]){
+      return mid;
+    }
+    else if (id > bookID[mid]){
+      min = mid + 1;
+    }
+    else{
+      max = mid;
+    }
+  }
+  return -1;
 }
 
 double calcTotalCost(double *bookPrice, int index, int qty){
@@ -71,16 +88,15 @@ void navigateMenu(int choice){
   switch(choice)
   {
     case 1:{
-      // Function call to Linear Search
       display(bookTitle, bookID, bookPrice);
       cout << "Please enter the book ID you wish to purchase: ";
       cin >> id;
       cout << "How many copies you wish to purchase: ";
       cin >> copies;
-      // Finding the index position of the inputted book ID
+      // Finding the index position of the inputted book ID through linear search
       index = linearSearch(bookID, id);
       // Continue to ask for a book ID until a valid one is provided
-      while (index == 0){
+      while (index == -1){
         cout << "That is not an existing book ID. Please enter the book ID you wish to purchase: ";
         cin >> id;
         index = linearSearch(bookID, id);
@@ -95,7 +111,26 @@ void navigateMenu(int choice){
       break;
     }
     case 2:{
-      // Function call to Binary Search
+      display(bookTitle, bookID, bookPrice);
+      cout << "Please enter the book ID you wish to purchase: ";
+      cin >> id;
+      cout << "How many copies you wish to purchase: ";
+      cin >> copies;
+      // Finding the index position of the inputted book ID through binary search
+      index = binarySearch(bookID, id);
+      // Continue to ask for a book ID until a valid one is provided
+      while (index == -1){
+        cout << "That is not an existing book ID. Please enter the book ID you wish to purchase: ";
+        cin >> id;
+        index = binarySearch(bookID, id);
+      }
+	    // Function call to calculate the total cost
+	    totalPrice = calcTotalCost(bookPrice, index, copies);
+	    // Outputing the data to the user
+	    cout << "Book ID: " << id << endl;
+	    cout << "Book Title: " << bookTitle[index] << endl;
+	    cout << "Number of books bought: " << copies << endl;
+	    cout << "Total Cost: $" << setprecision(2) << fixed << totalPrice << endl;
       break; 
     }
     case 3:{
