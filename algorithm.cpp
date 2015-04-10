@@ -102,9 +102,11 @@ void displayArray(int *array, int size){
 
 void bubbleSort(int *array, int size){
   while (true){
+    // having a condition to check if a swap was made, if none then it's sorted
     bool swapped = false;
     for (int i = 0; i < size - 1; i++){
       if (array[i] > array[i+1]){
+        // copy must be made so that the value is not lost while swapping
         int copy = array[i];
         array[i] = array[i+1];
         array[i+1] = copy;
@@ -112,6 +114,23 @@ void bubbleSort(int *array, int size){
       }
     }
     if (!swapped) break;
+  }
+}
+
+void selectionSort(int *array, int size){
+  int copy, index;
+  for(int i = 0; i< 500;i++){ // It starts the sort at the first position and then moves over one for each iteration b/c the first one is going to be the lowest
+    int min = 500;
+    for(int j=i;j<500;j++){
+      if(array[j] < min){
+        min = array[j];
+        index = j;
+      }
+    }
+    // copy must be made so that the value is not lost while swapping
+    copy = array[i];
+    array[i]=min;
+    array[index] = copy;
   }
 }
 
@@ -180,8 +199,18 @@ void navigateMenu(int choice){
       cout << endl;
       break;
     }
-    case 4:{
-      // Function call to Selection Sort
+    case 4:{ // Selection Sort
+      int arr[500];
+      // Create the unsorted array
+      initializeUnsortedArr(arr, 500);
+      cout << "**** SELECTION SORT ****\n";
+      cout << "Unsorted array:\n";
+      displayArray(arr, 500);
+      cout << endl;
+      selectionSort(arr, 500);
+      cout << endl << "Sorted array:\n";
+      displayArray(arr, 500);
+      cout << endl;
       break;
     }
   }
